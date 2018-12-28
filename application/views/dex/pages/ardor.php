@@ -20,7 +20,8 @@
                                       All Assets List
                                     </div>
                                     <div class="panel-body">
-                                       <table id="dex_ardor" class="table table-striped table-hover">
+                                      <div class="table-responsive">
+                                        <table id="dex_ardor" class="table table-striped table-hover">
                                           <thead>
                                              <tr>
                                                <th class="tableSmallPad">#</th>
@@ -36,6 +37,7 @@
 
                                           </tbody>
                                        </table>
+                                      </div>
                                     </div>
                                  </div>
                                  <div class="panel-footer">All Assets List </div>
