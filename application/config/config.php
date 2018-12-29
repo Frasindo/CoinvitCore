@@ -24,11 +24,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $root = "";
+$param = "";
 if (isset($_SERVER['HTTP_HOST'])) {
   $root = "https://" . $_SERVER['HTTP_HOST'];
   $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+}else {
+  $param = "https://";
 }
-$config['base_url'] = $root;
+$config['base_url'] = $param.$root;
 
 /*
 |--------------------------------------------------------------------------
