@@ -18,6 +18,7 @@ class Api extends REST_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->library('curl_lib');
         $this->load->model("crud/main");
         $this->load->model("proses/ardor_model","ardor");
         $this->dget = $this->input->get(null,true);
@@ -296,5 +297,78 @@ class Api extends REST_Controller
       }else {
         echo "Gagal Mengambil Data".PHP_EOL;
       }
+    }
+    public function stellarasset_get()
+    {
+      $this->main->setTable("stellartoken");
+      $res = $this->main->get();
+      $res = $res->result();
+      $data = $this->main->datatablesConvert($res,"no,name,status,score,price,vol,action");
+      $this->response($data);
+    }
+    public function stellarcron_get()
+    {
+      $curl = $this->curl_lib;
+      $offset = 0;
+      $loopcast = true;
+      $no = 2;
+      $data = [];
+      // $asset = $curl->get("https://stellar.api.stellarport.io/v6/Asset?search=&offset=0&limit=100&verified&depositable");
+      // $asset = json_decode($asset);
+      // $this->response($asset[0]->nativeTradeVolumes->daily);
+      $pause = 0;
+      do {
+        $asset = $curl->get("https://stellar.api.stellarport.io/v6/Asset?search=&offset=".$offset."&limit=100&verified&depositable");
+        if ($asset != FALSE) {
+          $asset = json_decode($asset);
+          $k =0;
+          foreach ($asset as $key => $value) {
+            if ($value->tomlUrl != null) {
+              $vol = 0;
+              if (isset($value->nativeTradeVolumes->daily)) {
+                $vol = $value->nativeTradeVolumes->daily;
+              }
+              echo "Ditemukan Asset Dengan TOML ".$value->tomlUrl.PHP_EOL;
+              $data[] = ["no"=>$no++,"status"=>"<span class='label label-success'><li class='fa fa-check'></li> Verified</span>","score"=>number_format($value->networkTrustScore*10,1),"name"=>$value->code,"price"=>$value->nativePrice,"vol"=>number_format($vol),"action"=>"<a href='".base_url("exchange/dex/stellar?asset=".$value->issuerId)."' class='btn btn-success'><li class='fa fa-exchange'></li></a>"];
+              if ($value->code == "FRAS" && $value->issuerId == "GC75WHUIMU7LV6WURMCA5GGF2S5FWFOK7K5VLR2WGRKWKZQAJQEBM53M") {
+                $temp = $data[0];
+                $data[0] = $data[$k];
+                $data[$k]  = $temp;
+              }
+            }else {
+              $pause++;
+              echo "Tidak Ditemukan Lagi Asset".PHP_EOL;
+              break;
+            }
+            $k++;
+          }
+
+        }else {
+          $loopcast = false;
+          echo "Gagal Ambil Data Asset".PHP_EOL;
+          break;
+        }
+        if ($pause > 1) {
+          $loopcast = false;
+        }
+        $offset = $offset + 100;
+      } while ($loopcast == true);
+      $n = 1;
+      foreach ($data as $key => &$value) {
+        $value["no"] = $n++;
+      }
+      $trunc = $this->db->truncate("stellartoken");
+      if ($trunc) {
+        echo "Pembersihan Data Berhasil".PHP_EOL;
+      }else {
+        echo "Pembersihan Data Gagal".PHP_EOL;
+      }
+      $save = $this->db->insert_batch("stellartoken",$data);
+      if ($save) {
+        echo "Saved !!".PHP_EOL;
+      }else {
+        echo "Fail !!".PHP_EOL;
+      }
+
     }
 }
