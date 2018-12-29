@@ -107,63 +107,11 @@ class Api extends REST_Controller
     }
     public function ardorasset_get()
     {
-      $get = $this->ardor->get("getAllAssets",[]);
-      if ($get != FALSE) {
-        $res = $get->assets;
-        $i = 1;
-        foreach ($res as $key => &$value) {
-          $value->no = $i++;
-          $value->name = ucfirst($value->name);
-          // $this->response($value->asset);
-          $lt = $this->ardor->get("getTrades",["chain"=>2,"asset"=>$value->asset]);
-          $value->last_trade = "-";
-          $value->price = "-";
-          $value->vol = "-";
-          $value->chg = "-";
-          $value->action = "<a href='".base_url("dex/ardor?asset=".$value->asset)."' class='btn btn-success'><li class='fa fa-exchange'></li></a>";
-          if ($lt != FALSE) {
-            // $this->response($lt);
-            if (count($lt->trades) > 0) {
-              $value->last_trade = $this->main->convertTimestamp($lt->trades[0]->timestamp);
-              $value->price = $lt->trades[0]->priceNQTPerShare/$this->QNT;
-              $onestep = 0;
-              if (isset($lt->trades[1]->priceNQTPerShare)) {
-                $onestep = $lt->trades[1]->priceNQTPerShare/$this->QNT;
-              }
-              $s = ($onestep-$value->price);
-              if ($s < 0) {
-                $up = ($value->price - $onestep);
-                $percent = (($up*$onestep)/100);
-                $value->chg = "<span class='label label-success'><li class='fa fa-caret-up'></li> ".number_format($value->price,8)."</span>";
-              }else {
-                $up = ($onestep - $value->price);
-                $percent = (($up*$onestep)/100);
-                $value->chg = "<span class='label label-danger'><li class='fa fa-caret-down'></li> ".number_format($value->price,8)."</span>";
-              }
-              $value->vol = 0;
-              foreach ($lt->trades as $key_t => $value_t) {
-                $value->vol = ($value->vol + $value_t->quantityQNT);
-              }
-              if ($value->vol > 0) {
-                $value->vol = ($value->vol/$this->QNT);
-              }
-            }
-
-          }
-          if($lt)
-          if ($value->asset == "4777913785555377445") {
-            $value->no = 1;
-            $temp = $res[0];
-            $temp->no = $i;
-            $res[0] = $value;
-            $res[$key] = $temp;
-          }
-        }
+        $this->main->setTable("ardortoken");
+        $res = $this->main->get();
+        $res = $res->result();
         $data = $this->main->datatablesConvert($res,"no,name,price,vol,chg,last_trade,action");
         $this->response($data);
-      }else {
-        $this->response(["data"=>[]]);
-      }
     }
     public function ardorchart_get($id='')
     {
@@ -264,6 +212,89 @@ class Api extends REST_Controller
         $this->response($data);
       }else {
         $this->response(["data"=>[]]);
+      }
+    }
+    public function ardorcron_get()
+    {
+      $get = $this->ardor->get("getAllAssets",[]);
+      if ($get != FALSE) {
+        $res = $get->assets;
+        $i = 1;
+        $ins = [];
+        foreach ($res as $key => &$value) {
+          $value->no = $i++;
+          $value->name = ucfirst($value->name);
+          // $this->response($value->asset);
+          $lt = $this->ardor->get("getTrades",["chain"=>2,"asset"=>$value->asset]);
+          $value->last_trade = "-";
+          $value->price = "-";
+          $value->vol = "-";
+          $value->chg = "-";
+          $value->action = "<a href='".base_url("exchange/dex/ardor?asset=".$value->asset)."' class='btn btn-success'><li class='fa fa-exchange'></li></a>";
+          if ($lt != FALSE) {
+            // $this->response($lt);
+            if (count($lt->trades) > 0) {
+              $value->last_trade = $this->main->convertTimestamp($lt->trades[0]->timestamp);
+              $value->price = $lt->trades[0]->priceNQTPerShare/$this->QNT;
+              $onestep = 0;
+              if (isset($lt->trades[1]->priceNQTPerShare)) {
+                $onestep = $lt->trades[1]->priceNQTPerShare/$this->QNT;
+              }
+              $s = ($onestep-$value->price);
+              if ($s < 0) {
+                $up = ($value->price - $onestep);
+                $percent = (($up*$onestep)/100);
+                $value->chg = "<span class='label label-success'><li class='fa fa-caret-up'></li> ".number_format($value->price,8)."</span>";
+              }else {
+                $up = ($onestep - $value->price);
+                $percent = (($up*$onestep)/100);
+                $value->chg = "<span class='label label-danger'><li class='fa fa-caret-down'></li> ".number_format($value->price,8)."</span>";
+              }
+              $value->vol = 0;
+              foreach ($lt->trades as $key_t => $value_t) {
+                $value->vol = ($value->vol + $value_t->quantityQNT);
+              }
+              if ($value->vol > 0) {
+                $value->vol = ($value->vol/$this->QNT);
+              }
+            }
+
+          }
+          if($lt)
+          if ($value->asset == "4777913785555377445") {
+            $value->no = 1;
+            $temp = $res[0];
+            $temp->no = $i;
+            $res[0] = $value;
+            $res[$key] = $temp;
+          }
+
+        }
+        $no = 1;
+        foreach ($res as $key => $value) {
+          echo $value->name." Telah Ditemukan Dengan Volume ".$value->vol.PHP_EOL;
+          if ($value->vol > 0) {
+            $ins[] = ["no"=>$no++,"name"=>$value->name,'price'=>$value->price,"vol"=>$value->vol,"chg"=>$value->chg,"last_trade"=>$value->last_trade,"action"=>$value->action];
+          }else {
+            echo "Volume ".$value->name." Tidak Memenuhi Syarat".PHP_EOL;
+          }
+        }
+        // $data = $this->main->datatablesConvert($res,"no,name,price,vol,chg,last_trade,action");
+        // $this->response($data);
+        $s = $this->db->truncate('ardortoken');
+        if ($s) {
+          echo "Data Terdahulu Berhasil di Bersihkan".PHP_EOL;
+        }else {
+          echo "Data Terdahulu Gagal di Bersihkan".PHP_EOL;
+        }
+        $a = $this->db->insert_batch("ardortoken",$ins);
+        if ($a) {
+          echo "Data Telah Tersimpan".PHP_EOL;
+        }else {
+          echo "Data Gagal Tersimpan".PHP_EOL;
+        }
+      }else {
+        echo "Gagal Mengambil Data".PHP_EOL;
       }
     }
 }
