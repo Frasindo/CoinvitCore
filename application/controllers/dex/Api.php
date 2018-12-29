@@ -325,11 +325,15 @@ class Api extends REST_Controller
           foreach ($asset as $key => $value) {
             if ($value->tomlUrl != null) {
               $vol = 0;
+              $img = "//stellarport.io/assets/default_asset.png";
               if (isset($value->nativeTradeVolumes->daily)) {
                 $vol = $value->nativeTradeVolumes->daily;
               }
+              if (isset($value->toml->image)) {
+                $img = $value->toml->image;
+              }
               echo "Ditemukan Asset Dengan TOML ".$value->tomlUrl.PHP_EOL;
-              $data[] = ["no"=>$no++,"status"=>"<span class='label label-success'><li class='fa fa-check'></li> Verified</span>","score"=>number_format($value->networkTrustScore*10,1),"name"=>$value->code,"price"=>$value->nativePrice,"vol"=>number_format($vol),"action"=>"<a href='".base_url("exchange/dex/stellar?asset=".$value->issuerId)."' class='btn btn-success'><li class='fa fa-exchange'></li></a>"];
+              $data[] = ["no"=>$no++,"status"=>"<span class='label label-success'><li class='fa fa-check'></li> Verified</span>","score"=>number_format($value->networkTrustScore*10,1),"name"=>"<img src='".$img."' style='width:20px;height:auto'> ".$value->code,"price"=>$value->nativePrice,"vol"=>number_format($vol),"action"=>"<a href='".base_url("exchange/dex/stellar?asset=".$value->issuerId)."' class='btn btn-success'><li class='fa fa-exchange'></li></a>"];
               if ($value->code == "FRAS" && $value->issuerId == "GC75WHUIMU7LV6WURMCA5GGF2S5FWFOK7K5VLR2WGRKWKZQAJQEBM53M") {
                 $temp = $data[0];
                 $data[0] = $data[$k];
