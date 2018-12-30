@@ -1,6 +1,7 @@
 {
     "require": {
         "mgp25/instagram-php": "^5.0",
-        "dompdf/dompdf": "^0.8.2"
+        "dompdf/dompdf": "^0.8.2",
+        "salsify/json-streaming-parser": "^8.0"
     }
 }

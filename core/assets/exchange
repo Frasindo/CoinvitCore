@@ -9,6 +9,7 @@
 -|assets/plugins/modernizr/modernizr.js
 -|assets/plugins/fastclick/fastclick.js
 -|assets/plugins/jquery/jquery.js
+//cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js
 -|assets/plugins/velocity/velocity.js
 -|assets/plugins/bootstrap/js/bootstrap.js
 -|assets/plugins/chosen/chosen.jquery.js

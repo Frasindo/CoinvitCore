@@ -1,0 +1,221 @@
+/* General Styling */
+
+
+.main {
+  background-color: #e9e9e9;
+  width: 960px;
+  margin-top: 40px;
+}
+/* One Column */
+
+.column-1 {
+  width: 910px;
+  background-color: #b3c8cd;
+  padding: 20px;
+  border: 5px solid #557f84;
+}
+/* Two Column */
+
+.column-2-left {
+  width: 420px;
+  float: left;
+  margin-right: 10px;
+}
+
+.column-2-right {
+  width: 420px;
+  float: right;
+  margin-left: 10px;
+}
+/* Three Column */
+
+.column-3-left {
+  width: 256px;
+  padding: 20px;
+  float: left;
+  margin-right: 10px;
+}
+
+.column-3-middle {
+  width: 258px;
+  background-color: #d5edcd;
+  padding: 20px;
+  border: 5px solid #67a155;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.column-3-right {
+  width: 256px;
+  background-color: #d5edcd;
+  padding: 20px;
+  border: 5px solid #67a155;
+  float: left;
+  margin-left: 10px;
+}
+/* Four Column */
+
+.column-4-left {
+  width: 175px;
+  background-color: #f5d7ce;
+  padding: 20px;
+  border: 5px solid #cb785e;
+  float: left;
+  margin-right: 10px;
+}
+
+.column-4-middle {
+  width: 175px;
+  background-color: #f5d7ce;
+  padding: 20px;
+  border: 5px solid #cb785e;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.column-4-right {
+  width: 175px;
+  background-color: #f5d7ce;
+  padding: 20px;
+  border: 5px solid #cb785e;
+  float: right;
+  margin-left: 10px;
+}
+/* Five Column */
+
+.column-5-left {
+  width: 126px;
+  background-color: #e7e6f8;
+  padding: 20px;
+  border: 5px solid #c2beeb;
+  float: left;
+  margin-right: 10px;
+}
+
+.column-5-middle {
+  width: 126px;
+  background-color: #e7e6f8;
+  padding: 20px;
+  border: 5px solid #c2beeb;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.column-5-right {
+  width: 126px;
+  background-color: #e7e6f8;
+  padding: 20px;
+  border: 5px solid #c2beeb;
+  float: right;
+  margin-left: 10px;
+}
+/* Six Column */
+
+.column-6-left {
+  width: 93px;
+  background-color: #d7ede9;
+  padding: 20px;
+  border: 5px solid #5e9d92;
+  float: left;
+  margin-right: 11px;
+}
+
+.column-6-header {
+  width: 185px;
+  float: left;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.column-6-right {
+  width: 93px;
+  background-color: #d7ede9;
+  padding: 20px;
+  border: 5px solid #5e9d92;
+  float: right;
+  margin-left: 11px;
+}
+
+
+/*Column 3 buy, sell, limit*/
+/* Three Column */
+
+.column-3-left-bsl {
+  width: 396px;
+  float: left;
+  margin-right: 10px;
+}
+
+.column-3-middle-bsl {
+  width: 398px;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.column-3-right-bsl {
+  width: 396px;
+  float: left;
+  margin-left: 10px;
+}
+
+/* Table Buy, Sell */
+/* Two Column */
+
+.column-2-left-buy {
+  width: 600px;
+  float: left;
+  margin-right: 10px;
+}
+
+.column-2-right-sell {
+  width: 600px;
+  float: right;
+  margin-left: 10px;
+}
+
+/*Four column Asset Market*/
+.column-4-asset {
+  width: 265px;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+/*Three column header market*/
+/* Three Column */
+
+.column-3-left-mh {
+  width: 506px;
+  float: left;
+  margin-right: 10px;
+}
+
+.column-3-middle-mh {
+  width: 508px;
+  float: left;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.column-3-right-mh {
+  width: 506px;
+  float: left;
+  margin-left: 10px;
+}
+
+/*Two column market header*/
+.column-2-left-mh {
+  width: 220px;
+  float: left;
+  margin-right: 10px;
+}
+
+.column-2-right-mh {
+  width: 250px;
+  float: right;
+  margin-left: 10px;
+}
