@@ -5,7 +5,6 @@ require APPPATH . 'libraries/REST_Controller.php';
  	 * API Restfull
  	 * @author Indra Gunanda
 	 */
-
 class Api extends REST_Controller
 {
     /**
@@ -114,6 +113,7 @@ class Api extends REST_Controller
         $data = $this->main->datatablesConvert($res,"no,name,price,vol,chg,last_trade,action");
         $this->response($data);
     }
+
     public function ardorchart_get($id='')
     {
       $lt = $this->ardor->get("getTrades",["chain"=>2,"asset"=>$id]);
@@ -224,7 +224,13 @@ class Api extends REST_Controller
         $ins = [];
         foreach ($res as $key => &$value) {
           $value->no = $i++;
-          $value->name = ucfirst($value->name);
+/**
+ 	 * Block comment
+ 	 *
+ 	 * @param type
+ 	 * @return void
+	 */
+	          $value->name = ucfirst($value->name);
           // $this->response($value->asset);
           $lt = $this->ardor->get("getTrades",["chain"=>2,"asset"=>$value->asset]);
           $value->last_trade = "-";
@@ -306,6 +312,30 @@ class Api extends REST_Controller
       $data = $this->main->datatablesConvert($res,"no,name,status,score,price,vol,action");
       $this->response($data);
     }
+    public function stellarchart_get($id)
+    {
+      $exp = explode("-",$id);
+      $url = "https://stellar.api.stellarport.io/Market/alphanum4/".$exp[1]."/".$exp[0]."/native/XLM/Stellar/Bars?resolution=3600&from=1999-01-01";
+      $curl = $this->curl_lib;
+      $data = $curl->get($url);
+      if ($data != FALSE) {
+        $res = [];
+        // echo $data->body;
+        // exit();
+        // var_dump($x);
+        $x =  json_decode($data->body);
+        // $this->response($x);
+        foreach ($x as $key => $value) {
+          // $date = date("Y-m-d H:i:s",strtotime($value->begin));
+          // preg_match('/^(.+):(\d+)$/i', $date, $matches);
+          // $tmp = strtotime($matches[1]).$matches[2];
+          $res[] = [strtotime($value->begin)*1000,$value->open,$value->high,$value->low,$value->close];
+        }
+        $this->response($res);
+      }else {
+        $this->response([]);
+      }
+    }
     public function stellarcron_get()
     {
       $curl = $this->curl_lib;
@@ -333,7 +363,7 @@ class Api extends REST_Controller
                 $img = $value->toml->image;
               }
               echo "Ditemukan Asset Dengan TOML ".$value->tomlUrl.PHP_EOL;
-              $data[] = ["no"=>$no++,"status"=>"<span class='label label-success'><li class='fa fa-check'></li> Verified</span>","score"=>number_format($value->networkTrustScore*10,1),"name"=>"<img src='".$img."' style='width:20px;height:auto'> ".$value->code,"price"=>$value->nativePrice,"vol"=>number_format($vol),"action"=>"<a href='".base_url("exchange/dex/stellar?asset=".$value->issuerId)."' class='btn btn-success'><li class='fa fa-exchange'></li></a>"];
+              $data[] = ["no"=>$no++,"status"=>"<span class='label label-success'><li class='fa fa-check'></li> Verified</span>","score"=>number_format($value->networkTrustScore*10,1),"name"=>"<img src='".$img."' style='width:20px;height:auto'> ".$value->code,"price"=>$value->nativePrice,"vol"=>number_format($vol),"action"=>"<a href='".base_url("exchange/dex/stellar?asset=".$value->issuerId."-".$value->code)."' class='btn btn-success'><li class='fa fa-exchange'></li></a>"];
               if ($value->code == "FRAS" && $value->issuerId == "GC75WHUIMU7LV6WURMCA5GGF2S5FWFOK7K5VLR2WGRKWKZQAJQEBM53M") {
                 $temp = $data[0];
                 $data[0] = $data[$k];
