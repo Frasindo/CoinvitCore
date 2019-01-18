@@ -162,6 +162,10 @@ class Template {
           $data_asset[$key] = $value;
         }
       }
+      if (!isset($page_data["sidebar_asset"])) {
+        $page_data["sidebar_asset"] = [];
+      }
+      $data_asset["sidebar_asset"] = $page_data["sidebar_asset"];
       $data_asset["title"] = $page_data["title"];
       $data_asset["css"] = $cssready;
       $data_asset["js"] = $jsready;

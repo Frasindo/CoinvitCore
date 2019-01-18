@@ -1,99 +1,78 @@
-<footer class="footer bg-dark-2">
-                     <div class="container">
-                         <div class="row">
 
-                             <div class="col-md-4 col-sm-8">
-                                 <h4 class="logo">Coinvit</h4>
-                                 <p>Architecto beatae vitae dicta sunt explicabo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vel sapien et lacus tempus varius. In finibus lorem vel.</p>
+        <footer class="main-footer">
+          <div class="row">
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <h1>ABOUT COINVIT</h1>
+              <h4><a href="#">Contact Us</a></h4>
+              <h4><a href="#">Fees</a></h4>
+              <h4><a href="#">Privacy Policy</a></h4>
+              <h4><a href="#">Terms of Use</a></h4>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <h1>SUPPORT</h1>
+              <h4><a href="#">++ Contact Support ++</a></h4>
+              <h4><a href="#">Guides</a></h4>
+              <h4><a href="#">++ SUBMIT A TOKEN ++</a></h4>
+              <h4><a href="#">REPORT Abuse</a></h4>
+              <h4><a href="#">API Documentation</a></h4>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <h1>NEWS</h1>
+              <h4><a href="#">Press Release</a></h4>
+              <h4><a href="#">Follow us on Twitter</a></h4>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <label>
+                <a href="">
+                  <i class="fa fa-telegram logo-socmed"></i>
+                </a>
+              </label>
 
-                                 <ul class="list-inline social">
-                                     <li>
-                                         <a href="javascript:void(0);" class="bg-twitter"><i class="fa fa-twitter"></i></a>
-                                     </li>
-                                     <li>
-                                         <a href="javascript:void(0);" class="bg-dribbble"><i class="fa fa-dribbble"></i></a>
-                                     </li>
-                                     <li>
-                                         <a href="javascript:void(0);" class="bg-linkedin"><i class="fa fa-linkedin"></i></a>
-                                     </li>
-                                     <li>
-                                         <a href="javascript:void(0);" class="bg-googleplus"><i class="fa fa-google"></i></a>
-                                     </li>
-                                     <li>
-                                         <a href="javascript:void(0);" class="bg-facebook"><i class="fa fa-facebook"></i></a>
-                                     </li>
-                                 </ul>
-                             </div>
+              <label>
+                <a href="">
+                  <i class="fa fa-facebook-square logo-socmed"></i>
+                </a>
+              </label>
 
-                             <div class="col-md-3 col-sm-6">
-                                 <h5>Quick Links</h5>
-                                 <ul class="list-unstyled footer-list">
-                                     <li><a href="#">Fee Info</a></li>
-                                     <li><a href="#">Start Trading</a></li>
-                                     <li><a href="#">We are Hiring</a></li>
-                                     <li><a href="#">Blog Posts</a></li>
-                                     <li><a href="#">API Docs</a></li>
-                                 </ul>
-                             </div>
+              <label>
+                <a href="">
+                  <i class="fa fa-twitter logo-socmed"></i>
+                </a>
+              </label>
 
-                             <div class="col-md-3 col-sm-6">
-                                 <h5>Useful Links</h5>
-                                 <ul class="list-unstyled footer-list">
-                                     <li><a href="#">About Us</a></li>
-                                     <li><a href="#">Help &amp; Support</a></li>
-                                     <li><a href="#">Privacy Policy</a></li>
-                                     <li><a href="#">Terms &amp; Conditions</a></li>
-                                     <li><a href="#">FAQ</a></li>
-                                 </ul>
-                             </div>
+              <label>
+                <a href="">
+                  <i class="fa fa-reddit logo-socmed"></i>
+                </a>
+              </label>
 
-                         </div> <!-- end row -->
+              <label>
+                <a href="">
+                  <i class="fa fa-medium logo-socmed"></i>
+                </a>
+              </label>
+
+              <label>
+                <a href="">
+                  <i class="fa fa-instagram logo-socmed"></i>
+                </a>
+              </label>
+
+            </div>
+          </div>
+        </footer>
+    </div>
+      <!-- End Tab_1 -->
 
 
-                     </div> <!-- end container -->
-                 </footer>
-                 <!-- end FOOTER -->
-         </section>
-      </section>
-      {js}
-      <script src="{url}"></script>
-      {/js}
-      <!--[if lt IE 8]><script src="js/excanvas.min.js"></script><![endif]-->
-      <script>
-         // $(document).ready(function() {
-         //    // Candlestick
-         //    $.getJSON(base_url('assets/tradify/data.json'), function (data) {
-         //
-         //        // create the chart
-         //        Highcharts.stockChart('candlestickChart', {
-         //
-         //          chart: {
-         //        },
-         //
-         //
-         //            rangeSelector: {
-         //                selected: 1
-         //            },
-         //
-         //            series: [{
-         //                type: 'candlestick',
-         //                name: 'SC-BTC',
-         //                data: data,
-         //                dataGrouping: {
-         //                    units: [
-         //                        [
-         //                            'week', // unit name
-         //                            [1] // allowed multiples
-         //                        ], [
-         //                            'month',
-         //                            [1, 2, 3, 4, 6]
-         //                        ]
-         //                    ]
-         //                }
-         //            }]
-         //        });
-         //    });
-         //    });
-      </script>
-   </body>
+      <!-- /.tab-pane -->
+    </div>
+    <!-- /.tab-content -->
+
+    {js}
+    <script src="{url}"></script>
+    {/js}
+
+</body>
+
 </html>

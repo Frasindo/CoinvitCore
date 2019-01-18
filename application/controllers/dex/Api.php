@@ -224,13 +224,7 @@ class Api extends REST_Controller
         $ins = [];
         foreach ($res as $key => &$value) {
           $value->no = $i++;
-/**
- 	 * Block comment
- 	 *
- 	 * @param type
- 	 * @return void
-	 */
-	          $value->name = ucfirst($value->name);
+          $value->name = ucfirst($value->name);
           // $this->response($value->asset);
           $lt = $this->ardor->get("getTrades",["chain"=>2,"asset"=>$value->asset]);
           $value->last_trade = "-";
@@ -363,7 +357,25 @@ class Api extends REST_Controller
                 $img = $value->toml->image;
               }
               echo "Ditemukan Asset Dengan TOML ".$value->tomlUrl.PHP_EOL;
-              $data[] = ["no"=>$no++,"status"=>"<span class='label label-success'><li class='fa fa-check'></li> Verified</span>","score"=>number_format($value->networkTrustScore*10,1),"name"=>"<img src='".$img."' style='width:20px;height:auto'> ".$value->code,"price"=>$value->nativePrice,"vol"=>number_format($vol),"action"=>"<a href='".base_url("exchange/dex/stellar?asset=".$value->issuerId."-".$value->code)."' class='btn btn-success'><li class='fa fa-exchange'></li></a>"];
+              $this->main->setTable("stellartoken");
+              $get = $this->main->get(["issuer"=>$value->issuer->accountId]);
+              $default_status = "default";
+              $change_value = "<li class='fa fa-minus'></li> 0 ";
+              if ($get->num_rows() > 0) {
+                $priceNow = $get->row()->price;
+                if ($priceNow < $value->nativePrice) {
+                  $default_status =  "success";
+                  $percent = ($value->nativePrice - $priceNow);
+                  $percent = (($percent * 100)/$value->nativePrice);
+                  $change_value = "<li class='fa fa-caret-up'></li> ".$percent;
+                }elseif($priceNow > $value->nativePrice) {
+                  $percent = ($priceNow - $value->nativePrice);
+                  $percent = (($percent * 100)/$value->nativePrice);
+                  $change_value = "<li class='fa fa-caret-down'></li> ".$percent;
+                  $default_status  ="danger";
+                }
+              }
+              $data[] = ["id"=>$no++,"token_name"=>$value->code,"volume"=>$vol,"img"=>$img,"issuer"=>$value->issuer->accountId,"toml_website"=>$value->issuer->homeDomain,"price"=>$value->nativePrice,"change_status"=>$default_status,"change_value"=>$change_value];
               if ($value->code == "FRAS" && $value->issuerId == "GC75WHUIMU7LV6WURMCA5GGF2S5FWFOK7K5VLR2WGRKWKZQAJQEBM53M") {
                 $temp = $data[0];
                 $data[0] = $data[$k];
@@ -389,7 +401,7 @@ class Api extends REST_Controller
       } while ($loopcast == true);
       $n = 1;
       foreach ($data as $key => &$value) {
-        $value["no"] = $n++;
+        $value["id"] = $n++;
       }
       $trunc = $this->db->truncate("stellartoken");
       if ($trunc) {

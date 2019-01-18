@@ -72,13 +72,29 @@ class Stellar extends CI_Controller{
         $this->template->renderHTML(['head','stellar_trade','foot'],['title'=>$data->code." - XLM",'other'=>$build]);
     }else {
       $build = [
-        "block_title"=>"DEX Stellar"
+        "block_title"=>"Stellar"
       ];
       $this->template->setjs([
         base_url("assets/main/dex/dex_stellar.js")
       ],true);
+      $this->main->setTable("stellartoken");
+      $get = $this->main->get();
+      $asset = [];
+      foreach ($get->result() as $key => $value) {
+        $asset[] =   [
+            "token_name"=>$value->token_name,
+            "issuer"=>substr($value->issuer,0,3)."...".substr($value->issuer,-3),
+            "toml_website"=>$value->toml_website,
+            "price"=>number_format($value->price,3),
+            "change_value"=>$value->change_value,
+            "change_status"=>$value->change_status,
+            "volume"=>number_format($value->volume,2),
+            "blockchain"=>"stellar",
+            "asset_id"=>$value->issuer
+          ];
+      }
       // Render
-      $this->template->renderHTML(['head','stellar','foot'],['title'=>"DEX Stellar",'other'=>$build]);
+      $this->template->renderHTML(['head','stellar','foot'],["sidebar_asset"=>$asset,'title'=>"Stellar",'other'=>$build]);
     }
   }
 
