@@ -26,13 +26,13 @@ class Home extends CI_Controller{
     $this->template->setFolder("dex");
     $this->template->defaultStyle("exchange");
     $build = [
-      "block_title"=>"Dashboard DEX"
+      "block_title"=>"Coinvit DEX"
     ];
     $this->template->setjs([
       base_url("assets/main/dex/home.js")
     ],true);
     // Render
-    $this->template->renderHTML(['head','home','foot'],['title'=>"Decentralize Exchange",'other'=>$build]);
+    $this->template->renderHTML(['head','home','foot'],['title'=>"Coinvit DEX",'other'=>$build]);
   }
 
 }

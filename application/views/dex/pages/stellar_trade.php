@@ -1,336 +1,489 @@
-<section>
-            <section class="main-content">
-               <h3>{block_title}</h3>
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="row">
-                        <div class="col-lg-3 col-sm-6">
-                           <div data-toggle="play-animation" data-play="fadeInDown" data-offset="0" data-delay="100" class="panel widget">
-                              <div class="panel-body bg-primary">
-                                 <div class="row row-table row-flush">
-                                    <div class="col-xs-12">
-                                       <p class="mb0">{trust_line}
-                                       </p>
-                                       <h4 class="m0">Total Trust</h4>
-                                       <span class="m-t-10"><i class="fa fa-exchange"></i> Trust Total
-                                       </span>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                           <div data-toggle="play-animation" data-play="fadeInDown" data-offset="0" data-delay="500" class="panel widget">
-                              <div class="panel-body bg-warning">
-                                 <div class="row row-table row-flush">
-                                    <div class="col-xs-12">
-                                       <p class="mb0">{trade_volume} </p>
-                                       <h4 class="m0">Trade Volume</h4>
-                                       <span class="f-left m-t-10">
-                                       <i class="fa fa-dollar"></i> 24h Trade Volume
-                                       </span>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                           <div data-toggle="play-animation" data-play="fadeInDown" data-offset="0" data-delay="1000" class="panel widget">
-                              <div class="panel-body bg-danger">
-                                 <div class="row row-table row-flush">
-                                    <div class="col-xs-12">
-                                       <p class="mb0">{last_trade} <em class="fa fa-refresh"></em></p>
-                                       <h4 class="m0">Last Trade</h4>
-                                       <span class="m-t-10">
-                                       <i class="text-c-green f-16 fa fa-refresh"></i> Last Trade
-                                       </span>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6">
-                           <div data-toggle="play-animation" data-play="fadeInDown" data-offset="0" data-delay="1500" class="panel widget">
-                              <div class="panel-body bg-success">
-                                 <div class="row row-table row-flush">
-                                    <div class="col-xs-12">
-                                       <p class="mb0">{total_supply} <em class="fa fa-money"></em></p>
-                                       <h4 class="m0">Total Supply</h4>
-                                       <span class="f-left m-t-10">
-                                       <i class="fa fa-money"></i> Total Supply
-                                       </span>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-lg-12">
-                           <div class="panel panel-default">
-                              <div class="panel-collapse">
-                                 <div class="panel-body">
-                                    <h4>{block_title}</h4>
-                                    <div id="chart_trade" class="h-500">
-
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-md-6">
-                           <div data-toggle="play-animation" data-play="fadeInLeft" data-offset="0" data-delay="1400" class="panel widget">
-                              <div class="panel-body">
-                                 <div class="text-right text-muted">
-                                    <em class="fa fa-gavel fa-2x text-danger"></em>
-                                 </div>
-                                 <h3 class="mt0">Bid Price</h3>
-                                 <p class="text-danger"></i> {bid_price} XLM</p>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-md-6">
-                           <div data-toggle="play-animation" data-play="fadeInLeft" data-offset="0" data-delay="1400" class="panel widget">
-                              <div class="panel-body">
-                                 <div class="text-right text-muted">
-                                    <em class="fa fa-bullhorn fa-2x text-green"></em>
-                                 </div>
-                                 <h3 class="mt0">Ask Price</h3>
-                                 <p class="text-green">{ask_price} XLM</p>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-
-               </div>
-               <div class="row">
-                  <div class="col-lg-6">
-                     <div class="panel panel-default">
-                        <div class="panel-heading">Bid Price
-                           <a href="#" data-perform="panel-collapse" data-toggle="tooltip" title="Collapse Panel" class="pull-right">
-                           <em class="fa fa-minus"></em>
-                           </a>
-                        </div>
-                        <div class="pannel panel-body">
-                           <label class="col-sm-2 control-label m-t-9">Units</label>
-                           <div class="input-group col-sm-10 m-b">
-                              <span class="input-group-addon btn-primary group-btn-hover"><i class="fa fa-angle-double-up"></i> Max</span>
-                              <input type="text" placeholder="0.00000000" class="form-control text-right">
-                           </div>
-                           <div class="m-t-9">
-                              <label class="col-sm-2 control-label m-t-9">Bid</label>
-                              <div class="input-group m-b">
-                                 <div class="input-group-btn">
-                                    <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Price
-                                  </button>
-                                 </div>
-                                 <input type="text" class="form-control text-right" placeholder="0.00000000">
-                              </div>
-                           </div>
-
-                           <div class="m-t-9">
-                              <label class="col-sm-2 control-label m-t-9">Total</label>
-                              <div class="input-group col-sm-10 m-b">
-                                 <span class="input-group-addon"><i class="fa fa-btc"></i></span>
-                                 <input type="text" placeholder="0.00000000" class="form-control text-right">
-                              </div>
-                           </div>
-                           <div class="m-t-9">
-                              <button type="button" class="btn btn-primary btn-block"><i class="fa fa-plus"></i> Buy {name_asset}</button>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-lg-6">
-                     <div class="panel panel-default">
-                        <div class="panel-heading">Ask Price
-                           <a href="#" data-perform="panel-collapse" data-toggle="tooltip" title="Collapse Panel" class="pull-right">
-                           <em class="fa fa-minus"></em>
-                           </a>
-                        </div>
-                        <div class="pannel panel-body">
-                           <label class="col-sm-2 control-label m-t-9">Units</label>
-                           <div class="input-group col-sm-10 m-b">
-                              <span class="input-group-addon btn-primary group-btn-hover"><i class="fa fa-angle-double-up"></i> Max</span>
-                              <input type="text" placeholder="0.00000000" class="form-control text-right">
-                           </div>
-                           <div class="m-t-9">
-                              <label class="col-sm-2 control-label m-t-9">Ask</label>
-                              <div class="input-group m-b">
-                                 <div class="input-group-btn">
-                                    <button type="button" data-toggle="dropdown" class="btn btn-default dropdown-toggle">Price
-                                    </button>
-
-                                 </div>
-                                 <input type="text" class="form-control text-right" placeholder="0.00000000">
-                              </div>
-                           </div>
-
-                           <div class="m-t-9">
-                              <label class="col-sm-2 control-label m-t-9">Total</label>
-                              <div class="input-group col-sm-10 m-b">
-                                 <span class="input-group-addon"><i class="fa fa-btc"></i></span>
-                                 <input type="text" placeholder="0.00000000" class="form-control text-right">
-                              </div>
-                           </div>
-                           <div class="m-t-9">
-                              <button type="button" class="btn btn-primary btn-block"><i class="fa fa-minus"></i> Sell {name_asset}</button>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <!-- Orders Book -->
-               <div class="row">
-               <div class="col-md-12">
-                  <div class="panel panel-default">
-                     <div class="panel-heading">Orders Book
-                        <a href="javascript:void(0);" data-perform="panel-collapse" data-toggle="tooltip" title="" class="pull-right" data-original-title="Collapse Panel">
-                        <em class="fa fa-minus"></em>
-                        </a>
-                     </div>
-                     <div class="panel-heading border-none">
-
-                     </div>
-                     <div class="panel-body">
-                        <div class="row">
-                           <div class="col-md-6 col-sm-12">
-                              <div class="table-responsive m-t-10">
-                                 <table class="table table-striped table-hover table-condensed" id="bid_table">
-                                    <thead>
-                                       <tr>
-                                          <th>
-                                             Price
-                                          </th>
-                                          <th>
-                                             Qty ({name_asset})
-                                          </th>
-                                          <th>
-                                             Total
-                                          </th>
-                                       </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                 </table>
-                              </div>
-                           </div>
-                           <div class="col-md-6 col-sm-12">
-                              <div class="table-responsive">
-                                 <table class="table table-striped table-hover table-condensed" id="ask_table">
-                                    <thead>
-                                       <tr>
-                                          <th>
-                                             Price
-                                          </th>
-                                          <th>
-                                             Qty ({name_asset})
-                                          </th>
-                                          <th>
-                                             Total
-                                          </th>
-                                       </tr>
-                                    </thead>
-                                    <tbody>
-
-                                    </tbody>
-                                 </table>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <!-- Open Orders -->
-               <div class="col-md-12">
-                  <div class="panel panel-default">
-                     <div class="panel-heading">Open Orders
-                        <a href="#" data-perform="panel-collapse" data-toggle="tooltip" title="Collapse Panel" class="pull-right">
-                        <em class="fa fa-minus"></em>
-                        </a>
-                     </div>
-                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
-                           <thead>
-                              <tr>
-                                 <th><i class="fa fa-plus"></i></th>
-                                 <th>Order Date</th>
-                                 <th>Type</th>
-                                 <th>Bid/Ask</th>
-                                 <th>Units Filled {name_asset}</th>
-                                 <th>Units Total {name_asset}</th>
-                                 <th>Actual Rate</th>
-                                 <th>Estimated Total IGNIS</th>
-                                 <th><i class="fa fa-times"></i></th>
-                              </tr>
-                           </thead>
-                           <tbody>
-
-                           </tbody>
-                        </table>
-                     </div>
-                  </div>
-               </div>
-               <!-- Market History -->
-               <div class="col-md-12">
-                  <div class="panel panel-default">
-                     <div class="panel-heading">Market History
-                        <a href="#" data-perform="panel-collapse" data-toggle="tooltip" title="Collapse Panel" class="pull-right">
-                        <em class="fa fa-minus"></em>
-                        </a>
-                     </div>
-                     <div class="panel-body">
-                       <div class="table-responsive">
-                          <table class="table table-striped table-hover" id="market_history">
-                             <thead>
-                                 <th>Date</th>
-                                 <th>Type</th>
-                                 <th>Quantity</th>
-                                 <th>Price</th>
-                             </thead>
-                             <tbody>
-
-                             </tbody>
-                          </table>
-                       </div>
-                     </div>
-                  </div>
-               </div>
-               <!-- My Order History -->
-               <div class="col-md-12">
-                  <div class="panel panel-default">
-                     <div class="panel-heading">My Order History
-                        <a href="#" data-perform="panel-collapse" data-toggle="tooltip" title="Collapse Panel" class="pull-right">
-                        <em class="fa fa-minus"></em>
-                        </a>
-                     </div>
-                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover">
-                           <thead>
-                              <tr>
-                                 <th>Closed Date</th>
-                                 <th>Opened Date</th>
-                                 <th>Type</th>
-                                 <th>Bid/Ask</th>
-                                 <th>Units Filled {name_asset}</th>
-                                 <th>Units Total {name_asset}</th>
-                                 <th>Actual Rate</th>
-                                 <th>Cost/Proceeds</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-
-                           </tbody>
-                        </table>
-                     </div>
-                     <div class="panel-footer">
-
-                     </div>
-                  </div>
-               </div>
+<div class="tab-pane active" id="tab_1">
+  <div class="content-wrapper">
+    <section style="margin-top: 40px;">
+      <div style="float: left; width: 1250px; background-color: #fff; height: 2570px;">
+        <div class="box">
+          <div class="box-header">
+            <!--Six Column Layout-->
+            <div class="column-6-header">
+              <img src="{img}" width="50" height="50" style="float: left; margin-right: 18px;">
+              <h4><b>{block_title}</b></h4>
             </div>
-            </section>
+
+            <div class="column-6-header">
+              <div class="description-block">
+                <h6 class="description-header">{usd_price} USD</h6>
+                <h6 class="description-header">{last_price} XLM</h6>
+                <span class="description-text">LAST PRICE</span>
+              </div>
+            </div>
+
+            <div class="column-6-header">
+              <div class="description-block">
+                <h6 class="description-header {change_color}" style="padding-top: 15px;"><i class="fa fa-{change_icon} {change_color}"></i> {change_value} %</h6>
+                <span class="description-text">% CHANGE</span>
+              </div>
+            </div>
+
+            <div class="column-6-header">
+              <div class="description-block">
+                <h6 class="description-header text-green">0.00008000 {name}</h6>
+                <h6 class="description-header text-red">0.00004000 {name}</h6>
+                <span class="description-text">HIGH & LOW</span>
+              </div>
+            </div>
+
+            <div class="column-6-header">
+              <div class="description-block">
+                <h6 class="description-header">0.4 USD</h6>
+                <h6 class="description-header">0.00004000 {name}</h6>
+                <span class="description-text">VOLUME</span>
+              </div>
+            </div>
+
+            <div class="column-6-header">
+              <img src="<?= base_url("assets/coinvit/") ?>logo/logocoinvit.png" width="auto" height="60">
+            </div>
+
+          </div>
+          <!-- End box-header -->
+          <div class="box">
+            <div class="box-header" style="width: 900px; margin: 0 auto;">
+
+            </div>
+            <!-- End box-header -->
+
+            <div class="box-body">
+              <div id="chart_trade" style="height: 600px; width: 100%;">
+
+              </div>
+              <div id="chart_depth" style="height: 200px; width: 100%;">
+
+              </div>
+              <!--Three Column Layout-->
+              <div class="column-3-left-bsl box box-success">
+                <form role="form" class="form-horizontal">
+                  <div class="box-body" style="height: auto;">
+                    <h3 class="box-title text-green">BUY {name}</h3>
+                    <div class="text-right">
+                      <h5 style="margin-top: -30px;"><b>0.00000000 {name}</b> : Lowest Ask</h5>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px;">
+                      <label class="col-sm-2 control-label">AMOUNT</label>
+                      <div class="col-sm-10">
+                        <div class="input-group">
+                          <input type="number" class="form-control">
+                          <span class="input-group-addon">XLM</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">PRICE</label>
+                      <div class="col-sm-10">
+                        <div class="input-group">
+                          <input type="number" class="form-control text-right">
+                          <span class="input-group-addon">{name}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">TOTAL</label>
+                      <div class="col-sm-10">
+                        <div class="input-group">
+                          <input type="number" class="form-control text-right">
+                          <span class="input-group-addon">{name}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="text-right">
+                      <button type="button" class="btn btn-default">Buy</button>
+                    </div>
+                  </div>
+                  <!-- /.box-body -->
+
+                </form>
+              </div>
+
+              <div class="column-3-middle-bsl box box-warning">
+                <!-- form start -->
+                <form role="form" class="form-horizontal">
+                  <div class="box-body" style="height: auto;">
+                    <h3 class="box-title text-orange">LIMIT</h3>
+                    <div class="text-right">
+                      <h5 style="margin-top: -30px;"><b>0.00000000 {name}</b> : Lowest Ask</h5>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px;">
+                      <label class="col-sm-2 control-label">AMOUNT</label>
+                      <div class="col-sm-10">
+                        <div class="input-group">
+                          <input type="number" class="form-control">
+                          <span class="input-group-addon">XLM</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">PRICE</label>
+                      <div class="col-sm-10">
+                        <div class="input-group">
+                          <input type="number" class="form-control text-right">
+                          <span class="input-group-addon">{name}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">TOTAL</label>
+                      <div class="col-sm-10">
+                        <div class="input-group">
+                          <input type="number" class="form-control text-right">
+                          <span class="input-group-addon">{name}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="text-right">
+                      <button type="button" class="btn btn-default">Buy</button>
+                    </div>
+                  </div>
+                  <!-- /.box-body -->
+
+                </form>
+              </div>
+
+              <div class="column-3-right-bsl box box-danger">
+                <!-- form start -->
+                <form role="form" class="form-horizontal">
+                  <div class="box-body" style="height: auto;">
+                    <h3 class="box-title text-red">SELL {name}</h3>
+                    <div class="text-right">
+                      <h5 style="margin-top: -30px;"><b>0.00000000 {name}</b> : Highest Ask</h5>
+                    </div>
+                    <div class="form-group" style="margin-top: 20px;">
+                      <label class="col-sm-2 control-label">AMOUNT</label>
+                      <div class="col-sm-10">
+                        <div class="input-group">
+                          <input type="number" class="form-control">
+                          <span class="input-group-addon">XLM</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">PRICE</label>
+                      <div class="col-sm-10">
+                        <div class="input-group">
+                          <input type="number" class="form-control text-right">
+                          <span class="input-group-addon">{name}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-2 control-label">TOTAL</label>
+                      <div class="col-sm-10">
+                        <div class="input-group">
+                          <input type="number" class="form-control text-right">
+                          <span class="input-group-addon">{name}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="text-right">
+                      <button type="button" class="btn btn-default">Sell</button>
+                    </div>
+                  </div>
+                  <!-- /.box-body -->
+
+                </form>
+              </div>
+
+              <!--Two Column Layout-->
+              <div class="column-2-left-buy">
+                <table class="table table-hover" id="bid" width="100%" cellspacing="0" style="background-color: #fff;">
+                  <thead style="background-color: #f4f4f5;">
+                    <tr>
+                      <th>SUM</th>
+                      <th>TOTAL</th>
+                      <th>SIZE (XLM)</th>
+                      <th>BID ({name})</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+              </div>
+              <div class="column-2-right-sell">
+                <table class="table table-hover" id="ask" width="100%" cellspacing="0" style="background-color: #fff;">
+                  <thead style="background-color: #f4f4f5;">
+                    <tr>
+                      <th></th>
+                      <th>ASK ({name})</th>
+                      <th>SIZE (XLM)</th>
+                      <th>TOTAL</th>
+                      <th>SUM</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+              </div>
+
+              <h3 class="text-left" style="margin-bottom: 8px; padding-left: 8px;">My Opens Order</h3>
+              <!-- My Open Orders -->
+              <table class="table table-hover" id="oo" width="100%" cellspacing="0" style="background-color: #fff;">
+                <thead>
+                  <tr style="background-color: #f4f4f5;">
+                    <th>TYPE</th>
+                    <th>PRICE</th>
+                    <th>AMOUNT</th>
+                    <th>TOTAL</th>
+                    <th>RATE/SHOP</th>
+                    <th>DATE</th>
+                    <th>ACTION</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
+
+
+              <div class="column-2-left-buy">
+                <h3 class="text-center" style="margin-bottom: 8px;">Market History</h3>
+                <!-- Market History -->
+                <table class="table table-hover" id="mh" width="100%" cellspacing="0" style="background-color: #fff;">
+                  <thead>
+                    <tr style="background-color: #f4f4f5;">
+                      <th>DATE</th>
+                      <th>ORDER</th>
+                      <th>BID/ASK</th>
+                      <th>TOTAL (XLM)</th>
+                      <th>TOTAL ({name})</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+                <!-- End Market History -->
+              </div>
+              <!-- End column-2-left -->
+
+              <div class="column-2-right-sell">
+                <h3 class="text-center" style="margin-bottom: 8px;">Your Trade History</h3>
+                <!-- Market History -->
+                <table class="table table-hover" id="yth" width="100%" cellspacing="0" style="background-color: #fff;">
+                  <thead>
+                    <tr style="background-color: #f4f4f5;">
+                      <th>CLOSED</th>
+                      <th>OPEN</th>
+                      <th>BID/ASK</th>
+                      <th>FILLED</th>
+                      <th>RATE</th>
+                      <th>COST</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+                <!-- End Your History -->
+              </div>
+              <!-- End column-2-right -->
+
+            </div>
+            <!-- End box-body -->
+          </div>
+        </div>
+        <!-- End Box -->
+      </div>
+      <!-- End -->
+
+
+      <div style="float: left; width: 300px; margin-left: 5px;">
+        <a href="">
+          <img src="https://www.mystellar.org/GALLERYALBUM/Stellar/Banner%206%20-%20RESERVED.png" width="100%" height="200">
+        </a>
+        <a href="">
+          <img src="https://www.mystellar.org/GALLERYALBUM/Stellar/Banner%206%20-%20stellar.png" width="100%" height="200">
+        </a>
+        <!-- DIRECT CHAT -->
+        <div class="box box-danger">
+          <div class="box-header with-border">
+            <h3 class="box-title">Chatroom Member</h3>
+          </div>
+          <!-- /.box-header -->
+          <div class="box-body">
+            <!-- Conversations are loaded here -->
+            <div class="direct-chat-messages" style="height: 320px;">
+              <!-- Message. Default to the left -->
+              <div class="direct-chat-msg">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                  <span class="direct-chat-timestamp pull-right">23 Jan 2:00 pm</span>
+                </div>
+                <!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
+                <!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  Is this template really for free? That's unbelievable!
+                </div>
+                <!-- /.direct-chat-text -->
+              </div>
+              <!-- /.direct-chat-msg -->
+
+              <!-- Message to the right -->
+              <div class="direct-chat-msg right">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                  <span class="direct-chat-timestamp pull-left">23 Jan 2:05 pm</span>
+                </div>
+                <!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
+                <!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  You better believe it!
+                </div>
+                <!-- /.direct-chat-text -->
+              </div>
+              <!-- /.direct-chat-msg -->
+
+              <!-- Message. Default to the left -->
+              <div class="direct-chat-msg">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-left">Alexander Pierce</span>
+                  <span class="direct-chat-timestamp pull-right">23 Jan 5:37 pm</span>
+                </div>
+                <!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image">
+                <!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  Working with AdminLTE on a great new app! Wanna join?
+                </div>
+                <!-- /.direct-chat-text -->
+              </div>
+              <!-- /.direct-chat-msg -->
+
+              <!-- Message to the right -->
+              <div class="direct-chat-msg right">
+                <div class="direct-chat-info clearfix">
+                  <span class="direct-chat-name pull-right">Sarah Bullock</span>
+                  <span class="direct-chat-timestamp pull-left">23 Jan 6:10 pm</span>
+                </div>
+                <!-- /.direct-chat-info -->
+                <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image">
+                <!-- /.direct-chat-img -->
+                <div class="direct-chat-text">
+                  I would love to.
+                </div>
+                <!-- /.direct-chat-text -->
+              </div>
+              <!-- /.direct-chat-msg -->
+
+            </div>
+            <!--/.direct-chat-messages-->
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <form action="#" method="post">
+              <div class="input-group">
+                <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                <span class="input-group-btn">
+                  <button type="button" class="btn btn-danger btn-flat">Send</button>
+                </span>
+              </div>
+            </form>
+          </div>
+          <!-- /.box-footer-->
+          <a class="twitter-timeline" data-height="500" href="https://twitter.com/StellarLumens?ref_src=twsrc%5Etfw" style="margin-left: -30px;">Tweets by StellarLumens</a>
+          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+          <a href="">
+            <img src="https://www.mystellar.org/GALLERYALBUM/Stellar/Banner%206%20-%20RESERVED.png" width="100%" height="200">
+          </a>
+          <a href="">
+            <img src="https://www.mystellar.org/GALLERYALBUM/Stellar/Banner%206%20-%20stellar.png" width="100%" height="200">
+          </a>
+
+
+          <div class="box box-primary" style="height: 825px;">
+            <div class="box-header with-border">
+              <h3 class="box-title"><b>NOTICES</b></h3>
+
+              <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+              </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <ul class="products-list product-list-in-box">
+                <li class="item">
+                  <div class="product-img">
+                    <img src="dist/img/default-50x50.gif" alt="Product Image">
+                  </div>
+                  <div class="product-info">
+                    <a href="javascript:void(0)" class="product-title">Samsung TV
+                      <span class="label label-warning pull-right">$1800</span></a>
+                    <span class="product-description">
+                      Samsung 32" 1080p 60Hz LED Smart HDTV.
+                    </span>
+                  </div>
+                </li>
+                <!-- /.item -->
+                <li class="item">
+                  <div class="product-img">
+                    <img src="dist/img/default-50x50.gif" alt="Product Image">
+                  </div>
+                  <div class="product-info">
+                    <a href="javascript:void(0)" class="product-title">Bicycle
+                      <span class="label label-info pull-right">$700</span></a>
+                    <span class="product-description">
+                      26" Mongoose Dolomite Men's 7-speed, Navy Blue.
+                    </span>
+                  </div>
+                </li>
+                <!-- /.item -->
+                <li class="item">
+                  <div class="product-img">
+                    <img src="dist/img/default-50x50.gif" alt="Product Image">
+                  </div>
+                  <div class="product-info">
+                    <a href="javascript:void(0)" class="product-title">Xbox One <span class="label label-danger pull-right">$350</span></a>
+                    <span class="product-description">
+                      Xbox One Console Bundle with Halo Master Chief Collection.
+                    </span>
+                  </div>
+                </li>
+                <!-- /.item -->
+                <li class="item">
+                  <div class="product-img">
+                    <img src="dist/img/default-50x50.gif" alt="Product Image">
+                  </div>
+                  <div class="product-info">
+                    <a href="javascript:void(0)" class="product-title">PlayStation 4
+                      <span class="label label-success pull-right">$399</span></a>
+                    <span class="product-description">
+                      PlayStation 4 500GB Console (PS4)
+                    </span>
+                  </div>
+                </li>
+                <!-- /.item -->
+              </ul>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer text-center">
+              <a href="javascript:void(0)" class="uppercase">View All Products</a>
+            </div>
+            <!-- /.box-footer -->
+          </div>
+        </div>
+        <!--/.direct-chat -->
+
+
+      </div>
+      <!-- RIGHT -->
+    </section>
+</div>

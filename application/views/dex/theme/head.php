@@ -116,6 +116,11 @@ $base = function($url = ''){
 </head>
 
 <body class="hold-transition skin-blue fixed sidebar-mini sidebar-collapse">
+  <script type="text/javascript">
+    const base_url = function(url=""){
+      return "<?= base_url("") ?>"+url;
+    };
+  </script>
   <div class="wrapper">
 
     <header class="main-header">
@@ -245,9 +250,14 @@ $base = function($url = ''){
     <aside class="main-sidebar">
       <!-- sidebar: style can be found in sidebar.less -->
       <!-- Sidebar user panel -->
+
+      <?php
+        $class = $this->router->fetch_class();
+        $icon = ["stellar"=>"https://bittrexblobstorage.blob.core.windows.net/public/c41db2ef-2635-4438-a1c1-0a680c8857e1.png","waves","ardor","nxt","eth","tron","home"=>"https://static.thenounproject.com/png/128599-200.png"];
+      ?>
       <div class="user-panel">
         <div class="pull-left">
-          <img src="https://bittrexblobstorage.blob.core.windows.net/public/c41db2ef-2635-4438-a1c1-0a680c8857e1.png" style="width: 100%; max-width: 45px; height: auto;">
+          <img src="<?= $icon[$class] ?>" style="width: 100%; max-width: 45px; height: auto;">
         </div>
         <div class="pull-left info">
           <p style="font-size: 28px; font-style: italic;">{title}</p>
@@ -280,7 +290,7 @@ $base = function($url = ''){
         <ul class="sidebar-menu" data-widget="tree" id="asset">
           {sidebar_asset}
           <li class="cc" >
-            <a href="<?= $base("exchange/dex/") ?>{blockchain}?asset={asset_id}" style="height: 60px;">
+            <a href="<?= $base() ?>{blockchain}?asset={asset_id}-{token_name}" style="height: 60px;">
               <i style="font-size: 18px;">{token_name}</i>
               <span style="font-size: 12px; font-color: grey;">{issuer} | {toml_website}</span>
               <span class="pull-right-container">

@@ -330,6 +330,57 @@ class Api extends REST_Controller
         $this->response([]);
       }
     }
+    public function stellardepth_get($id)
+    {
+      $exp = explode("-",$id);
+      $url = "https://stellar.api.stellarport.io/Market/alphanum4/".$exp[1]."/".$exp[0]."/native/XLM/Stellar/Orderbook";
+      $curl = $this->curl_lib;
+      $data = $curl->get($url);
+      if ($data != FALSE) {
+        $res = [];
+        $res["bids"] = [];
+        $res["asks"] = [];
+        $x =  json_decode($data->body);
+        $bid = $x->bids;
+        $ask = $x->asks;
+        $bidAmm = [];
+        foreach ($bid as $key => $value) {
+          $bidAmm[] = $value->amount;
+        }
+        $bidAmm = array_unique($bidAmm);
+        foreach ($bidAmm as $key_x => $value_x) {
+          $amm = $value_x;
+          $price = 0;
+          foreach ($bid as $key => $value) {
+            if ($value->amount == $amm) {
+              $price = $price + $value->price;
+            }
+          }
+          $res["bids"][] = [$amm,$price];
+        }
+        $askAmm = [];
+        foreach ($ask as $key => $value) {
+          $askAmm[] = $value->amount;
+        }
+        $askAmm = array_unique($askAmm);
+        foreach ($askAmm as $key_x => $value_x) {
+          $amm = $value_x;
+          $price = 0;
+          foreach ($ask as $key => $value) {
+            if ($value->amount == $amm) {
+              $price = $price + $value->price;
+            }
+          }
+          $res["asks"][] = [$amm,$price];
+        }
+        //SORT
+        sort($res["bids"]);
+        sort($res["asks"]);
+        $this->response($res);
+      }else {
+        $this->response([]);
+      }
+    }
     public function stellarcron_get()
     {
       $curl = $this->curl_lib;
@@ -353,6 +404,9 @@ class Api extends REST_Controller
               if (isset($value->nativeTradeVolumes->daily)) {
                 $vol = $value->nativeTradeVolumes->daily;
               }
+              if ($vol <= 0) {
+                continue;
+              }
               if (isset($value->toml->image)) {
                 $img = $value->toml->image;
               }
@@ -360,19 +414,33 @@ class Api extends REST_Controller
               $this->main->setTable("stellartoken");
               $get = $this->main->get(["issuer"=>$value->issuer->accountId]);
               $default_status = "default";
-              $change_value = "<li class='fa fa-minus'></li> 0 ";
+              $change_value = 0;
               if ($get->num_rows() > 0) {
                 $priceNow = $get->row()->price;
                 if ($priceNow < $value->nativePrice) {
+                  echo $value->code." Naik dari ".$priceNow." Ke ".$value->nativePrice.PHP_EOL;
                   $default_status =  "success";
                   $percent = ($value->nativePrice - $priceNow);
+                  if ($percent <= 0) {
+                    continue;
+                  }
                   $percent = (($percent * 100)/$value->nativePrice);
-                  $change_value = "<li class='fa fa-caret-up'></li> ".$percent;
+                  $change_value = $percent;
                 }elseif($priceNow > $value->nativePrice) {
-                  $percent = ($priceNow - $value->nativePrice);
-                  $percent = (($percent * 100)/$value->nativePrice);
-                  $change_value = "<li class='fa fa-caret-down'></li> ".$percent;
+                  $harga = $value->nativePrice;
+                  if (!is_numeric($value->nativePrice)) {
+                    $harga = 0;
+                  }
+                  echo $value->code." Turun dari ".$priceNow." Ke ".$value->nativePrice.PHP_EOL;
                   $default_status  ="danger";
+                  $percent = ($priceNow - $harga);
+                  if ($percent <= 0.01) {
+                    $percent = 0;
+                  }else {
+                    $percent = 0;
+                  }
+                  // exit();
+                  $change_value = $percent;
                 }
               }
               $data[] = ["id"=>$no++,"token_name"=>$value->code,"volume"=>$vol,"img"=>$img,"issuer"=>$value->issuer->accountId,"toml_website"=>$value->issuer->homeDomain,"price"=>$value->nativePrice,"change_status"=>$default_status,"change_value"=>$change_value];
